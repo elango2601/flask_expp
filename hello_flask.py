@@ -51,18 +51,13 @@ def statuspage():
     status=request.args.get("textinput")
     return render_template("statuspage.html", status=status)
     
-@app.route('/123', methods =["GET", "POST"])
-def gfg():
-    
+@app.route("/123", methods=["GET", "POST"])
+def home():
     if request.method == "POST":
-       
-       first_name = request.form.get("name")
-       
-       last_name = request.form.get("name2") 
-       return "Your name is "+first_name + last_name
-    return render_template("form.html")
-    
-
+        first_name = request.form.get("name")
+        last_name = request.form.get("name2")
+        return f"Hello, {first_name} {last_name}! You have successfully logged in."
+    return render_template("form.html", author="/123") 
  
 
         
