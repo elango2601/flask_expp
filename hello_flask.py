@@ -61,6 +61,8 @@ def gfg():
        last_name = request.form.get("name2") 
        return "Your name is "+first_name + last_name
     return render_template("form.html")
+    
+
  
 
         
