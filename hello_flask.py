@@ -1,4 +1,6 @@
-from flask import Flask, render_template, redirect, request
+import sqlite3
+from flask import Flask, render_template, redirect, request, jsonify
+
 import datetime
 
 app=Flask(__name__)
@@ -58,7 +60,23 @@ def home():
         last_name = request.form.get("name2")
         return f"Hello, {first_name} {last_name}! You have successfully logged in."
     return render_template("form.html", author="/123") 
- 
+    
+app.config["DEBUG"]=True
+    
+@app.route("/api", methods=["GET"])
+def getGames():
+    console=request.args['Console']
+    conn=sqlite3.connect(r"E:\Elango\flask_exp\test.db")
+    cur=conn.cursor()
+    sql = f"SELECT * FROM games WHERE console = '{console}'"    
+    cur.execute(sql)
+    
+    result=cur.fetchall()
+    
+    return jsonify(result)
+    # return "test"
+    
+
 
         
 if __name__=="__main__":
